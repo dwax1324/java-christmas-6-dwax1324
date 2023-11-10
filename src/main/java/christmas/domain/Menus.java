@@ -31,4 +31,8 @@ public class Menus {
         }
         return total;
     }
+
+    public Integer countCategoryByCategoryName(String categoryName) {
+        return this.menus.stream().filter((menu) -> menu.isCategoryByCategoryName(categoryName)).toList().size();
+    }
 }

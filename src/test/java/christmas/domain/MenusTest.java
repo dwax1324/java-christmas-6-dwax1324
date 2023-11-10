@@ -3,6 +3,7 @@ package christmas.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
+import christmas.constants.MenuGroup;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -30,5 +31,15 @@ class MenusTest {
         final int trial = menus.totalPrice();
         // then
         assertThat(trial).isEqualTo(price);
+    }
+
+
+    @DisplayName("메뉴 모음에서 입력된 카테코리 이름을 갖는 메뉴의 수를 반환하는지 확인")
+    @Test
+    void test() {
+        Menus menus = Menus.from("시저샐러드-1, 티본스테이크-1, 크리스마스파스타-1, 제로콜라-3, 아이스크림-1");
+        assertThat(menus.countCategoryByCategoryName(MenuGroup.MAIN.name())).isEqualTo(2);
+        menus = Menus.from("티본스테이크-20");
+        assertThat(menus.countCategoryByCategoryName(MenuGroup.MAIN.name())).isEqualTo(20);
     }
 }
