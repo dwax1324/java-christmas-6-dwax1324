@@ -1,6 +1,6 @@
 #
 
-핵심 기능: 날짜와 메뉴가 주어지면 중복된 할인, 증정, 배지 계산
+핵심 기능: 중복된 할인, 증정, 배지 계산
 
 
 # 기능 구현
@@ -38,6 +38,7 @@ IntegratedView.getDate() -> IntegratedView.getMenus()
 # Model
 
 ### Menu
+- [] Interface로 구현
 ```
 - appetizer <애피타이저> 양송이수프(6,000), 타파스(5,500), 시저샐러드(8,000)
 
@@ -49,11 +50,12 @@ IntegratedView.getDate() -> IntegratedView.getMenus()
 ```
 
 ### Menus
-- [] Menu<class>,<name>, <price>
+- [] Menu<category>,<name>, <price>
 
 ### Discounts
 - [] Discount<date>,<validate date>, <validate price>, <discount>
 ### Discount
+- [] interface로 구현
 ```
 - 크리스마스 디데이 할인
     - 이벤트 기간: 2023.12.1 ~ 2023.12.25
@@ -72,9 +74,10 @@ IntegratedView.getDate() -> IntegratedView.getMenus()
 - [] validate price
 
 ### EventPlanner
-
+- [x] 날짜 검증
+    - [x] 1이상 31이하의 수인지 확인
 - [] 금액 검증
-- [] 날짜 검증
+
 
 
 
