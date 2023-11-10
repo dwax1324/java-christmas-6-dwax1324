@@ -14,10 +14,18 @@ public class Menu {
         this.price = MenuGroup.findPriceByName(name);
     }
 
-    void validate(String name) {
-        if (MenuGroup.findCategoryByName(name).equals("NONE")) {
+    private void validate(String name) {
+        if (!MenuGroup.isNameExist(name)) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public Integer getPrice() {
+        return this.price;
+    }
+
+    public boolean isCategoryByCategoryName(String categoryName) {
+        return this.category.equals(categoryName);
     }
 
     public static Menu of(String name) {
