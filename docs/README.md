@@ -45,7 +45,8 @@ IntegratedView.getDate() -> IntegratedView.getMenus()
 
 ### Menu
 
-이름,
+- [x] 이름 검사 기능
+    - [x] 저장 되지 않은 이름이면 예외를 발생 시킨다
 
 ```
 - appetizer <애피타이저> 양송이수프(6,000), 타파스(5,500), 시저샐러드(8,000)
@@ -66,8 +67,6 @@ IntegratedView.getDate() -> IntegratedView.getMenus()
 - [] Discount<date>,<validate date>, <validate price>, <discount>
 
 ### Discount
-
-- [] interface로 구현
 
 ```
 - 크리스마스 디데이 할인
