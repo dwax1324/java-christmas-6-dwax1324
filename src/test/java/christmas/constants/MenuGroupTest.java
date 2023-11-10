@@ -16,8 +16,8 @@ class MenuGroupTest {
     @DisplayName("저장 되지 않은 이름에 대한 예외 처리")
     @ParameterizedTest
     @ValueSource(strings = {"없음", "애송이수프", "티포스", "똥양꿍", ""})
-    void findCategoryByName() {
-        assertThat(MenuGroup.findCategoryByName("없음")).isEqualTo("NONE");
+    void isNameExist(String input) {
+        assertThat(MenuGroup.isNameExist(input)).isEqualTo(false);
     }
 
 
@@ -37,7 +37,13 @@ class MenuGroupTest {
         }
     }
 
+    @DisplayName("저장된 이름이 ")
     @Test
-    void valueOf() {
+    void findName() {
+        for (int i = 0; i < 4; i++) {
+            assertThat(MenuGroup.findPriceByName(main.get(i))).isEqualTo(mainPrice.get(i));
+        }
     }
+
+
 }

@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 
-enum MenuGroup {
+public enum MenuGroup {
 
     APPETIZER(Map.of("양송이수프", 6000, "타파스", 5000, "시저샐러드", 8000)),
     MAIN(Map.of("티본스테이크", 55000, "바비큐립", 54000, "해산물파스타", 35000, "크리스마스파스타", 25000)),
@@ -18,24 +18,30 @@ enum MenuGroup {
         this.menuInformation = menuInformation;
     }
 
-    public Integer getPrice(String name) {
+    public boolean hasName(String name) {
+        return menuInformation.containsKey(name);
+    }
+
+    public Integer getPriceByName(String name) {
         return menuInformation.get(name);
     }
 
     public static String findCategoryByName(String name) {
         return Arrays.stream(MenuGroup.values())
                 .filter(menuGroup -> menuGroup.hasName(name))
-                .findAny().orElse(NONE).name();
+                .findAny().orElse(NONE)
+                .name();
     }
 
     public static Integer findPriceByName(String name) {
         return Arrays.stream(MenuGroup.values())
                 .filter(menuGroup -> menuGroup.hasName(name))
-                .findAny().orElse(NONE).getPrice(name);
+                .findAny().orElse(NONE)
+                .getPriceByName(name);
 
     }
 
-    public boolean hasName(String name) {
-        return menuInformation.containsKey(name);
+    public static boolean isNameExist(String name) {
+        return !findCategoryByName(name).equals("NONE");
     }
 }
