@@ -70,6 +70,9 @@ IntegratedView.getDate() -> IntegratedView.getMenus()
 
 ### Discount
 
+- [x] 인터페이스 작성
+- [] ㄱ
+
 ```
 - 크리스마스 디데이 할인
     - 이벤트 기간: 2023.12.1 ~ 2023.12.25
