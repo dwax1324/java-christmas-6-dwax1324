@@ -2,9 +2,7 @@
 
 핵심 기능: 중복된 할인, 증정, 배지 계산
 
-
 # 기능 구현
-
 
 ```
 Controller 4단계 구성
@@ -12,33 +10,43 @@ IntegratedView.getDate() -> IntegratedView.getMenus()
 -> EventPlaner().simulate() -> OutputView.showResult()
 ```
 
-
-
 ---
+
 # View
 
 ### InputView
+
 - [] 입력 기능
 - [] 입력 형식을 검증하는 기능
+
 ### OutputView
+
 - [] 안내 메시지 출력 기능
 - [] 에러 메시지 출력 기능
 - [] 이벤트 계산 결과 출력 기능
+
 ### IntegratedView
+
 - [] 안내 메시지를 출력한 후 입력을 받아 반환하는 기능
 - [] getDate()
 - [] getMenus()
 
 ---
+
 # Controller
+
 ### EventService
+
 - [] 각 객체들을 순서에 맞게 요청하는 기능
 
 ---
+
 # Model
 
 ### Menu
-- [] Interface로 구현
+
+이름,
+
 ```
 - appetizer <애피타이저> 양송이수프(6,000), 타파스(5,500), 시저샐러드(8,000)
 
@@ -50,12 +58,17 @@ IntegratedView.getDate() -> IntegratedView.getMenus()
 ```
 
 ### Menus
+
 - [] Menu<category>,<name>, <price>
 
 ### Discounts
+
 - [] Discount<date>,<validate date>, <validate price>, <discount>
+
 ### Discount
+
 - [] interface로 구현
+
 ```
 - 크리스마스 디데이 할인
     - 이벤트 기간: 2023.12.1 ~ 2023.12.25
@@ -65,23 +78,35 @@ IntegratedView.getDate() -> IntegratedView.getMenus()
 - 주말 할인(금요일, 토요일): 주말에는 메인 메뉴를 메뉴 1개당 2,023원 할인
 - 특별 할인: 이벤트 달력에 별이 있으면 총주문 금액에서 1,000원 할인
 ```
+
 ### Gift
+
 "할인 전 총주문 금액"이 12만 원 이상일 때, 샴페인 1개 증정
+
 - [] validate price
 
 ### Badge
+
 "총혜택 금액"에 따라 다른 이벤트 배지
+
 - [] validate price
 
 ### EventPlanner
+
 - [x] 날짜 검증
     - [x] 1이상 31이하의 수인지 확인
 - [] 금액 검증
 
+### constants/MenuGroup
 
+- [x] 카테고리 별로 메뉴와 가격을 저장하는 기능
+- [x] 메뉴가 카테고리에 속하는지 확인하는 기능
 
+개선점:
 
-### constants/
+- 이름과 가격을 따로 정할 수 없는지?
+- enum을 꼭 써야할까?
+- map을 사용하면 더 빠르지 않을까?
 
 ```
 주의할 점
