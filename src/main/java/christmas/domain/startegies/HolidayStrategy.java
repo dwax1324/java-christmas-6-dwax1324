@@ -1,5 +1,6 @@
 package christmas.domain.startegies;
 
+import christmas.constants.MenuGroup;
 import christmas.constants.Policy;
 import christmas.domain.Discount;
 
@@ -9,6 +10,6 @@ public class HolidayStrategy implements DiscountStrategy {
         if (!discount.isHoliday()) {
             return 0;
         }
-        return Policy.HOLIDAY_DISCOUNT.getValue();
+        return discount.count(MenuGroup.DESSERT.name()) * Policy.HOLIDAY_DISCOUNT.getValue();
     }
 }
