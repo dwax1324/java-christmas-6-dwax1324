@@ -60,7 +60,9 @@ IntegratedView.getDate() -> IntegratedView.getMenus()
 
 ### Menus
 
-- [] Menu<category>,<name>, <price>
+- [x] 메뉴들을 저장하는 기능
+- [x] 메뉴의 개수가 20개 이하인지 검사하는 기능
+- [x] 메뉴들의 가격 총합을 반환하는 기능
 
 ### Discounts
 
