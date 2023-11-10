@@ -71,7 +71,8 @@ IntegratedView.getDate() -> IntegratedView.getMenus()
 ### Discount
 
 - [x] 인터페이스 작성
-- [] ㄱ
+- [ ] 주말 할인 기능
+    - [] 금요일, 토요일에는 메뉴 1개당 2,023원 할인한다
 
 ```
 - 크리스마스 디데이 할인
@@ -110,6 +111,12 @@ IntegratedView.getDate() -> IntegratedView.getMenus()
 - [x] 메뉴 이름이 존재하는지 확인하는 기능
     - [x] 한 카테고리에서 메뉴 이름이 존재하는지 확인하는 기능
 
+개선점:
+
+- 이름과 가격을 따로 정할 수 없는지?
+- enum을 꼭 써야할까?
+- map을 사용하면 더 빠르지 않을까?
+
 ### Utils/Parser
 
 - [x] 메뉴 입력을 파싱하는 기능
@@ -120,11 +127,10 @@ IntegratedView.getDate() -> IntegratedView.getMenus()
     - [x] '-' 구분자로 구분 했을 때 두 개의 덩어리로 나누어지는지 확인한다
 - [x] 파싱된 이름들을 수량에 맞게 더해서 반환하는 기능
 
-개선점:
+### Utils/Date
 
-- 이름과 가격을 따로 정할 수 없는지?
-- enum을 꼭 써야할까?
-- map을 사용하면 더 빠르지 않을까?
+- [x] 휴일인지 검사하는 기능
+- [x] 두 날짜 사이의 기간을 반환하는 기능
 
 ```
 주의할 점
