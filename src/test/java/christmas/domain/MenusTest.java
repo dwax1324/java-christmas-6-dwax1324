@@ -42,4 +42,11 @@ class MenusTest {
         menus = Menus.from("티본스테이크-20");
         assertThat(menus.countCategoryByCategoryName(MenuGroup.MAIN.name())).isEqualTo(20);
     }
+
+    @Test
+    void test2() {
+        Menus menus = Menus.from("시저샐러드-10, 티본스테이크-7, 크리스마스파스타-1, 제로콜라-1, 아이스크림-1");
+        assertThat(menus.count(Menu.of("시저샐러드"))).isEqualTo(10);
+        assertThat(menus.count(Menu.of("티본스테이크"))).isEqualTo(7);
+    }
 }

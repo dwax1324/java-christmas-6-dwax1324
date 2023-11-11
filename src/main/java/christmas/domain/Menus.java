@@ -35,4 +35,15 @@ public class Menus {
     public Integer countCategoryByCategoryName(String categoryName) {
         return this.menus.stream().filter((menu) -> menu.isCategoryByCategoryName(categoryName)).toList().size();
     }
+
+
+    public Integer count(Menu menu) {
+        return Math.toIntExact(menus.stream().filter(m -> m.equals(menu)).count());
+    }
+
+//    public MenusDto toDto() {
+//        Map<String, Integer> entities = new HashMap<>();
+
+//        return null;
+//    }
 }
