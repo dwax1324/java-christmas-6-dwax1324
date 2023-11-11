@@ -105,6 +105,7 @@ InputView.getDate() -> InputView.getMenus()
 
 "총혜택 금액"에 따라 다른 이벤트 배지
 
+- [x] 주어진 금액에 맞는 이름을 반환하는 기능
 - [] validate price
 
 ### EventPlanner
