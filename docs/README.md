@@ -129,6 +129,11 @@ InputView.getDate() -> InputView.getMenus()
 - 이름과 가격을 따로 정할 수 없는지?
 - enum을 꼭 써야할까?
 - map을 사용하면 더 빠르지 않을까?
+-
+
+### Constants/Policy
+
+- [x] 프로그램 진행에 필요한 상수 저장
 
 ### Utils/Parser
 
