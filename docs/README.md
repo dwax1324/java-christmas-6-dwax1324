@@ -26,8 +26,8 @@ InputView.getDate() -> InputView.getMenus()
 ### OutputView
 
 - [x] 안내 메시지 출력 기능
+- [x] 이벤트 계산 결과 출력 기능`
 - [] 에러 메시지 출력 기능
-- [] 이벤트 계산 결과 출력 기능
 
 ---
 
