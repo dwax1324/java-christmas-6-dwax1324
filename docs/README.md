@@ -113,6 +113,7 @@ InputView.getDate() -> InputView.getMenus()
 - [x] 날짜 검증
     - [x] 1이상 31이하의 수인지 확인
 - [] 금액 검증
+- [x] 출력을 위해 필요한 자료들만 변환시키는 기능
 
 ### Constants/MenuGroup
 
@@ -150,6 +151,10 @@ InputView.getDate() -> InputView.getMenus()
 
 - [x] 레코드 사용
 - [x] 주문한 음식들의 목록을 저장하는 기능
+
+### Dto/EventPlannerDto
+
+- [x] 이벤트 결과를 저장하는 기능
 
 ```
 주의할 점
