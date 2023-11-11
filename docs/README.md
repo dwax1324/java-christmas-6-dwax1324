@@ -17,6 +17,7 @@ IntegratedView.getDate() -> IntegratedView.getMenus()
 ### InputView
 
 - [] 입력 기능
+- [] 안내 메시지를 출력한 후 입력을 받아 반환하는 기능
 - [] 입력 형식을 검증하는 기능
 
 ### OutputView
@@ -24,12 +25,6 @@ IntegratedView.getDate() -> IntegratedView.getMenus()
 - [] 안내 메시지 출력 기능
 - [] 에러 메시지 출력 기능
 - [] 이벤트 계산 결과 출력 기능
-
-### IntegratedView
-
-- [] 안내 메시지를 출력한 후 입력을 받아 반환하는 기능
-- [] getDate()
-- [] getMenus()
 
 ---
 
