@@ -26,11 +26,19 @@ class MenuTest {
     }
 
 
-    @DisplayName("메뉴 이름과 일치하는지 확인하는 기능 테스트")
+    @DisplayName("카테코리 이름이 주어졌을 때 카테고리 이름이 동일한지 확인하는 기능 테스트")
     @ParameterizedTest
     @ValueSource(strings = {"제로콜라", "레드와인", "샴페인"})
     void checkCategory(String input) {
         Menu menu = Menu.of(input);
         assertThat(menu.isCategoryByCategoryName(MenuGroup.BEVERAGE.name())).isEqualTo(true);
+    }
+
+    @DisplayName("두 메뉴가 같은지 확인하는 기능 테스트")
+    @Test
+    void hasSameName() {
+        Menu menu1 = Menu.of("제로콜라");
+        Menu menu2 = Menu.of("제로콜라");
+        assertThat(menu1.equals(menu2)).isEqualTo(true);
     }
 }

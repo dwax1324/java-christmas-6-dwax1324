@@ -31,4 +31,8 @@ public class Menu {
     public static Menu of(String name) {
         return new Menu(name);
     }
+
+    public boolean equals(Menu menu) {
+        return this.name.equals(menu.name);
+    }
 }
