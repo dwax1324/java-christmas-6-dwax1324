@@ -1,7 +1,10 @@
 package christmas.domain;
 
 import christmas.Utils.Parser;
+import christmas.dto.MenusDto;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Menus {
     private final List<Menu> menus;
@@ -41,9 +44,9 @@ public class Menus {
         return Math.toIntExact(menus.stream().filter(m -> m.equals(menu)).count());
     }
 
-//    public MenusDto toDto() {
-//        Map<String, Integer> entities = new HashMap<>();
-
-//        return null;
-//    }
+    public MenusDto toDto() {
+        Map<String, Integer> entities = new HashMap<>();
+        menus.forEach((r) -> entities.put(r.getName(), this.count(r)));
+        return new MenusDto(entities.entrySet().stream().toList());
+    }
 }

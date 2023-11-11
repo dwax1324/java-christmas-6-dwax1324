@@ -49,4 +49,14 @@ class MenusTest {
         assertThat(menus.count(Menu.of("시저샐러드"))).isEqualTo(10);
         assertThat(menus.count(Menu.of("티본스테이크"))).isEqualTo(7);
     }
+
+
+    @DisplayName("toDto Test")
+    @Test
+    void test3() {
+        Menus menus = Menus.from("티본스테이크-10");
+        assertThat(menus.toDto().menus().get(0).getKey().equals("티본스테이크")).isEqualTo(true);
+        assertThat(menus.toDto().menus().get(0).getValue().equals(10)).isEqualTo(true);
+    }
+
 }

@@ -149,6 +149,7 @@ IntegratedView.getDate() -> IntegratedView.getMenus()
 
 ### Dto/MenusDto
 
+- [x] 레코드 사용
 - [x] 주문한 음식들의 목록을 저장하는 기능
 
 ```
