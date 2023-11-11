@@ -6,7 +6,7 @@
 
 ```
 Controller 4단계 구성
-IntegratedView.getDate() -> IntegratedView.getMenus()
+InputView.getDate() -> InputView.getMenus()
 -> EventPlaner().simulate() -> OutputView.showResult()
 ```
 
@@ -20,7 +20,9 @@ IntegratedView.getDate() -> IntegratedView.getMenus()
     - [x] 날짜를 입력 받는다
     - [] 메뉴와 수량을 입력 받는다
 - [] 안내 메시지를 출력한다
-- [] 입력 형식을 검증하는 기능
+- [x] 날짜를 검증하는 기능
+    - [x] 비어있는 입력인지 확인한다
+    - [x] 파싱이 되는지 확인한다(overflow이하의 수만 입력 받는다)
 
 ### OutputView
 
