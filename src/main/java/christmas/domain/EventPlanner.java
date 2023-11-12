@@ -37,23 +37,27 @@ public class EventPlanner {
             return null;
         }
         Discount discount = Discount.of(date, menus);
-        return discount.calculate(new HolidayStrategy(), new DesignatedDayStrategy(), new SpecialStrategy(),
+        List<Entry<String, Integer>> discountResult = discount.calculateByStrategies(new HolidayStrategy(),
+                new DesignatedDayStrategy(), new SpecialStrategy(),
                 new WeekDayStrategy());
+        if (isGift()) {
+            discountResult.add(Map.entry("증정 이벤트", 25000));
+        }
+        return discountResult;
     }
 
     private boolean isGift() {
         return menus.totalPrice() >= 120000;
     }
 
-    private String getBadge() {
-        int price = menus.totalPrice();
-        if (price >= 20000) {
+    private String getBadge(Integer afterDiscount) {
+        if (afterDiscount >= 20000) {
             return "산타";
         }
-        if (price >= 10000) {
+        if (afterDiscount >= 10000) {
             return "트리";
         }
-        if (price >= 5000) {
+        if (afterDiscount >= 5000) {
             return "별";
         }
         return "없음";
@@ -78,9 +82,10 @@ public class EventPlanner {
         if (isGift()) {
             totalBenefit += 25000;
         }
+        int afterDiscount = menus.totalPrice() - discounted;
         totalBenefit += discounted;
         return new EventPlannerDto(date, menus.toDto(), menus.totalPrice(), isGift(), getDiscount(), totalBenefit,
-                menus.totalPrice() - discounted, getBadge());
+                afterDiscount, getBadge(afterDiscount));
     }
 
     public static void validateDate(Integer date) {
