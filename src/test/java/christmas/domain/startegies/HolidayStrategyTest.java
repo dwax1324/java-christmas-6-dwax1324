@@ -14,7 +14,7 @@ class HolidayStrategyTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 8, 9, 15, 16, 22, 23, 29, 30})
     void checkHolidayDiscount(int input) {
-        Menus menus = Menus.from("초코케이크-2");
+        Menus menus = Menus.from("티본스테이크-2");
         assertThat(new HolidayStrategy().discount(Discount.of(input, menus))).isEqualTo(2023 * 2);
     }
 
@@ -22,7 +22,7 @@ class HolidayStrategyTest {
     @ParameterizedTest
     @ValueSource(ints = {3, 4, 5, 6, 10, 11, 12})
     void notHolidayDiscount(int input) {
-        Menus menus = Menus.from("제로콜라-1");
+        Menus menus = Menus.from("티본스테이크-2");
         assertThat(new HolidayStrategy().discount(Discount.of(input, menus))).isEqualTo(0);
     }
 
