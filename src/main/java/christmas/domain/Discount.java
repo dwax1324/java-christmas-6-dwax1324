@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class Discount {
 
@@ -26,22 +26,16 @@ public class Discount {
     }
 
 
-    public List<Map.Entry<String, Integer>> calculate(DiscountStrategy... strategies) {
+    public List<Map.Entry<String, Integer>> calculateByStrategies(DiscountStrategy... strategies) {
+        assert (isEventPeriod()); // Christmas event period: 2023.12.01 ~2023.12.31
         List<Map.Entry<String, Integer>> discounts = new ArrayList<>();
         for (DiscountStrategy strategy : strategies) {
             discounts.add(Map.entry(strategy.name(), strategy.discount(this)));
         }
-        if (discounts.stream().mapToInt(Entry::getValue).sum() == 0) { // no discount
-            return null;
-        }
-        if (!isEventPeriod()) { // assert event period
-            return null;
-        }
-        return discounts.stream().filter(discount -> discount.getValue() > 0).toList();
+        return discounts.stream().filter(discount -> discount.getValue() > 0).collect(Collectors.toList());
     }
 
     private boolean isEventPeriod() {
-        // event period: 2023.12.01 ~2023.12.31
         return localDate.getYear() == 2023 && localDate.getMonthValue() == 12;
     }
 

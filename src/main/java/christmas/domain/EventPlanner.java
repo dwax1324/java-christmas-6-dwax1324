@@ -31,7 +31,7 @@ public class EventPlanner {
 
     private List<Map.Entry<String, Integer>> getDiscount() {
         if (menus.totalPrice() < Policy.MIN_COST_FOR_DISCOUNT.getValue()) {
-            return null;
+            return List.of(); // no discount
         }
         Discount discount = Discount.of(date, menus);
         List<Entry<String, Integer>> discountResult = discount.calculateByStrategies(new HolidayStrategy(),
@@ -45,14 +45,7 @@ public class EventPlanner {
     private boolean isGift() {
         return menus.totalPrice() >= Policy.MIN_COST_FOR_GIFT.getValue();
     }
-
-    private Integer getGiftPrice() {
-        if (isGift()) {
-            return Policy.CHAMPAGNE.getValue();
-        }
-        return 0;
-    }
-
+    
     private String getBadge(Integer afterDiscount) {
         if (afterDiscount >= Policy.SANTA.getValue()) {
             return Notification.SANTA.getMessage();
@@ -67,17 +60,13 @@ public class EventPlanner {
     }
 
     private Integer getTotalDiscount(List<Map.Entry<String, Integer>> discount) {
-        if (discount == null) {
-            return 0;
-        }
         return discount.stream().mapToInt(Entry::getValue).sum();
     }
 
     public EventPlannerDto toDto() {
-        int discounted = getTotalDiscount(getDiscount());
+        int discounted = getTotalDiscount(getDiscount()); // 총혜택 금액 = 할인 금액의 합계 + 증정 메뉴의 가격
         int afterDiscount = menus.totalPrice() - discounted; // 할인 후 예상 결제 금액 = 할인 전 총주문 금액 - 할인 금액
-        int totalBenefit = discounted + getGiftPrice(); // 총혜택 금액 = 할인 금액의 합계 + 증정 메뉴의 가격
-        return new EventPlannerDto(date, menus.toDto(), menus.totalPrice(), isGift(), getDiscount(), totalBenefit,
+        return new EventPlannerDto(date, menus.toDto(), menus.totalPrice(), isGift(), getDiscount(), discounted,
                 afterDiscount, getBadge(afterDiscount));
     }
 
