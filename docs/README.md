@@ -186,6 +186,11 @@ InputView.getDate() -> InputView.getMenus()
 -[x] 휴일할인을 계산하는 기능
 -[x] 이름 반환 기능
 
+### Strategies/SpecialStrategy
+
+-[x] 특별할인을 계산하는 기능
+-[x] 이름 반환 기능
+
 ```
 주의할 점
 가격 표기할 때 콤마
