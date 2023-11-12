@@ -24,8 +24,7 @@ public class OutputView {
     }
 
     public void printResult(EventPlannerDto eventPlannerDto) {
-        System.out.printf("%d월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!", Policy.MONTH.getValue(), eventPlannerDto.date());
-        System.out.println();
+        System.out.printf("%d월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n", Policy.MONTH.getValue(), eventPlannerDto.date());
         System.out.println();
         final List<Entry<String, List<String>>> resultOrder = List.of(
                 Map.entry("주문 메뉴", formatMenu(eventPlannerDto.menusDto())),
@@ -39,6 +38,20 @@ public class OutputView {
         resultOrder.forEach(r -> print(r.getKey(), r.getValue()));
     }
 
+    public void printError(String message) {
+        System.out.println(message);
+    }
+
+    private void print(String notification, List<String> datas) {
+        System.out.println("<" + notification + ">");
+        for (String data : datas) {
+            System.out.println(data);
+        }
+        if (!notification.contains("배지")) {
+            System.out.println();
+        }
+    }
+
     private List<String> formatBadge(String badge) {
         return List.of(badge);
     }
@@ -48,7 +61,11 @@ public class OutputView {
     }
 
     private List<String> formatTotalBenefit(Integer benefit) {
-        return List.of(String.format("%,d", benefit) + "원");
+        String prefix = "";
+        if (benefit > 0) {
+            prefix = "-";
+        }
+        return List.of(prefix + String.format("%,d", benefit) + "원");
     }
 
     private List<String> formatDiscounts(List<Entry<String, Integer>> discounts) {
@@ -74,11 +91,4 @@ public class OutputView {
                 .toList();
     }
 
-    private void print(String notification, List<String> datas) {
-        System.out.println("<" + notification + ">");
-        for (String data : datas) {
-            System.out.println(data);
-        }
-        System.out.println();
-    }
 }
