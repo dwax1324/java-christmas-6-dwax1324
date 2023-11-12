@@ -69,7 +69,7 @@ InputView.getDate() -> InputView.getMenus()
 
 ### Discounts
 
-- [] Discount<date>,<validate date>, <validate price>, <discount>
+- [x] 전략들이 주어졌을 때 할인된 비용을 반환하는 기능
 
 ### Discount
 

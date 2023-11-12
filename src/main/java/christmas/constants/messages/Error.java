@@ -9,7 +9,7 @@ public enum Error {
         this.error = error;
     }
 
-    public String getError() {
-        return String.format("[Error] 유효하지 않은 %s입니다. 다시 입력해 주세요.", this.error);
+    public String getMessage() {
+        return String.format("[ERROR] 유효하지 않은 %s입니다. 다시 입력해 주세요.", this.error);
     }
 }
