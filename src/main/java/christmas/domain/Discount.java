@@ -4,8 +4,10 @@ import christmas.constants.Holidays;
 import christmas.constants.Policy;
 import christmas.domain.startegies.DiscountStrategy;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class Discount {
 
@@ -23,31 +25,24 @@ public class Discount {
     }
 
 
-    public List<Integer> calculate(DiscountStrategy... strategies) {
-//        assert (Policy.HOLIDAY_DISCOUNT.getValue() == 2023 && Policy.MONTH.getValue() == 12); // double check
-        Integer totalDiscount = 0;
+    public List<Map.Entry<String, Integer>> calculate(DiscountStrategy... strategies) {
+        List<Map.Entry<String, Integer>> discounts = new ArrayList<>();
         for (DiscountStrategy strategy : strategies) {
-            totalDiscount += strategy.discount(this);
+            discounts.add(Map.entry(strategy.name(), strategy.discount(this)));
         }
-        return null;
+        if (menus.totalPrice() < 10000 || discounts.stream().allMatch(r -> r.getValue() == 0)) {
+            return null;
+        }
+        return discounts.stream().filter(r -> r.getValue() > 0).toList();
     }
 
-//    public boolean isHoliday() {
-//        return Date.isHoliday(this.localDate);
-//    }
+    public Integer getDate() {
+        return localDate.getDayOfMonth();
+    }
 
-//    public long getDistance(Integer date) {
-//        return Date.period(LocalDate.of(Policy.YEAR.getValue(), Policy.MONTH.getValue(), this.date),
-//                LocalDate.of(Policy.YEAR.getValue(), Policy.MONTH.getValue(), date));
-//    }
-
-//    public Integer count(String name) {
-//        return menus.countCategoryByCategoryName(name);
-//    }
-//
-//    public boolean isSunday() {
-//        return Date.isSunday(LocalDate.of(Policy.YEAR.getValue(), Policy.MONTH.getValue(), this.date));
-//    }
+    public Integer count(String name) {
+        return menus.countCategoryByCategoryName(name);
+    }
 
     public boolean isHoliday() {
         String dayOfWeek = localDate.getDayOfWeek().name();

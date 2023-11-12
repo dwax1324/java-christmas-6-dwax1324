@@ -7,7 +7,7 @@
 ```
 Controller 4단계 구성
 InputView.getDate() -> InputView.getMenus()
--> EventPlaner().simulate() -> OutputView.showResult()
+-> EventPlaner().toDto() -> OutputView.showResult()
 ```
 
 ---
@@ -74,7 +74,8 @@ InputView.getDate() -> InputView.getMenus()
 ### Discount
 
 - [x] 각각의 할인 전략을 입력 받아서 할인을 계산하는 기능
--
+- [x] 1만원 미만일시 할인 혜택을 없애는 기능
+
 - [x] 주말 할인 기능
     - [x] 금요일, 토요일에는 디저트 메뉴 1개당 2,023원을 할인한다
 - [x] 디데이 할인 기능
