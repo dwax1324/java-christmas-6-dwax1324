@@ -22,6 +22,9 @@ public class InputView {
 
     private void validateFormatOfMenu(String input) {
         List<String> menus = Arrays.stream(input.split(",")).toList();
+        if (input.charAt(input.length() - 1) == ',') {
+            throw new IllegalArgumentException(Error.MENU.getMessage());
+        }
         if (menus.isEmpty()) {
             throw new IllegalArgumentException(Error.MENU.getMessage());
         }
