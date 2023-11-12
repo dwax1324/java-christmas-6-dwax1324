@@ -1,9 +1,11 @@
 package christmas.domain.startegies;
 
 import christmas.constants.Policy;
+import christmas.constants.messages.Notification;
 import christmas.domain.Discount;
 
 public class DesignatedDayStrategy implements DiscountStrategy {
+    
     @Override
     public Integer discount(Discount discount) {
         if (discount.getDate() > 25) {
@@ -12,5 +14,10 @@ public class DesignatedDayStrategy implements DiscountStrategy {
         final int designatedDay = discount.getDate() - 1;
         return Policy.DDAY_INITIAL_DISCOUNT.getValue()
                 + designatedDay * Policy.DDAY_AFTER_DISCOUNT.getValue();
+    }
+
+    @Override
+    public String name() {
+        return Notification.DESIGNATED_DAY_DISCOUNT.getMessage();
     }
 }
