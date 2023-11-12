@@ -5,22 +5,47 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 class ApplicationTest extends NsTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/inputContains.csv", delimiter = '/')
+    void 예상_가능한_유효한_입력에_대한_검사(String date, String menu, String message, String inputCase) {
+        assertSimpleTest(() -> {
+            run(date, menu);
+            assertThat(output()).contains(
+                    message
+            );
+        });
+
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/inputErrors.csv", delimiter = '/')
+    void 예상_가능한_잘못된_입력에_대한_예외_처리(String date, String menu, String inputCase) {
+//        System.err.println(date + " " + menu + " " + errorCase);
+        assertSimpleTest(() -> {
+            runException(date, menu);
+            assertThat(output()).contains("[ERROR]");
+        });
+    }
+
 
     @Test
     void 모든_타이틀_출력() {
         assertSimpleTest(() -> {
             run("3", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
             assertThat(output()).contains(
-                "<주문 메뉴>",
-                "<할인 전 총주문 금액>",
-                "<증정 메뉴>",
-                "<혜택 내역>",
-                "<총혜택 금액>",
-                "<할인 후 예상 결제 금액>",
-                "<12월 이벤트 배지>"
+                    "<주문 메뉴>",
+                    "<할인 전 총주문 금액>",
+                    "<증정 메뉴>",
+                    "<혜택 내역>",
+                    "<총혜택 금액>",
+                    "<할인 후 예상 결제 금액>",
+                    "<12월 이벤트 배지>"
             );
         });
     }
