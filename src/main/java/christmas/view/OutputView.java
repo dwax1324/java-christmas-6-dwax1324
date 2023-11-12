@@ -4,6 +4,7 @@ import christmas.constants.Policy;
 import christmas.dto.EventPlannerDto;
 import christmas.dto.MenusDto;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 public class OutputView {
@@ -26,62 +27,58 @@ public class OutputView {
         System.out.printf("%d월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!", Policy.MONTH.getValue(), eventPlannerDto.date());
         System.out.println();
         System.out.println();
-        printOrderedMenu(eventPlannerDto.menusDto());
-        printBeforeDiscount(eventPlannerDto.beforeDiscount());
-        printGift(eventPlannerDto.isGift());
-        printDiscounts(eventPlannerDto.discounts());
-        printTotalBenefit(eventPlannerDto.totalBenefit());
-        printAfterDiscount(eventPlannerDto.afterDiscount());
-        printBadge(eventPlannerDto.badge());
+        final List<Entry<String, List<String>>> resultOrder = List.of(
+                Map.entry("주문 메뉴", formatMenu(eventPlannerDto.menusDto())),
+                Map.entry("할인 전 총주문 금액", formatBeforeDiscount(eventPlannerDto.beforeDiscount())),
+                Map.entry("증정 메뉴", formatGift(eventPlannerDto.isGift())),
+                Map.entry("혜택 내역", formatDiscounts(eventPlannerDto.discounts())),
+                Map.entry("총혜택 금액", formatTotalBenefit(eventPlannerDto.totalBenefit())),
+                Map.entry("할인 후 예상 결제 금액", formatAfterDiscount(eventPlannerDto.afterDiscount())),
+                Map.entry("12월 이벤트 배지", formatBadge(eventPlannerDto.badge()))
+        );
+        resultOrder.forEach(r -> print(r.getKey(), r.getValue()));
     }
 
-    private void printTotalBenefit(Integer benefit) {
-        System.out.println("<총혜택 금액>");
-        if (benefit != 0) {
-            System.out.print("-");
+    private List<String> formatBadge(String badge) {
+        return List.of(badge);
+    }
+
+    private List<String> formatAfterDiscount(Integer afterDiscount) {
+        return List.of(String.format("%,d", afterDiscount) + "원");
+    }
+
+    private List<String> formatTotalBenefit(Integer benefit) {
+        return List.of(String.format("%,d", benefit) + "원");
+    }
+
+    private List<String> formatDiscounts(List<Entry<String, Integer>> discounts) {
+        if (discounts == null) {
+            return List.of("없음");
         }
-        System.out.println(String.format("%,d", benefit) + "원");
-        System.out.println();
+        return discounts.stream().map(r -> r.getKey() + ": -" + String.format("%,d", r.getValue()) + "원").toList();
     }
 
-    private void printBadge(String badge) {
-        System.out.printf("<%d월 이벤트 배지>\n", Policy.MONTH.getValue());
-        System.out.println(badge);
-    }
-
-    private void printAfterDiscount(Integer price) {
-        System.out.println("<할인 후 예상 결제 금액>");
-        System.out.println(String.format("%,d", price) + "원");
-        System.out.println();
-    }
-
-    private void printDiscounts(List<Entry<String, Integer>> discounts) {
-        System.out.println("<혜택 내역>");
-        discounts.forEach(r -> System.out.println(r.getKey() + ": -" + String.format("%,d", r.getValue())));
-        System.out.println();
-    }
-
-    private void printGift(Boolean gift) {
-        System.out.println("<증정 메뉴>");
+    private List<String> formatGift(Boolean gift) {
         if (gift) {
-            System.out.println("샴페인 1개");
-            System.out.println();
-            return;
+            return List.of("샴페인 1개");
         }
-        System.out.println("없음");
-        System.out.println();
+        return List.of("없음");
     }
 
-
-    private void printBeforeDiscount(Integer price) {
-        System.out.println("<할인 전 총주문 금액>");
-        System.out.println(String.format("%,d", price) + "원");
-        System.out.println();
+    private List<String> formatBeforeDiscount(Integer beforeDiscount) {
+        return List.of(String.format("%,d", beforeDiscount) + "원");
     }
 
-    private void printOrderedMenu(MenusDto menusDto) {
-        System.out.println("<주문 메뉴>");
-        menusDto.menus().forEach(r -> System.out.println(r.getKey() + " " + r.getValue() + "개"));
+    private List<String> formatMenu(MenusDto menusDto) {
+        return menusDto.menus().stream().map(menu -> menu.getKey() + " " + menu.getValue().toString() + "개")
+                .toList();
+    }
+
+    private void print(String notification, List<String> datas) {
+        System.out.println("<" + notification + ">");
+        for (String data : datas) {
+            System.out.println(data);
+        }
         System.out.println();
     }
 }
