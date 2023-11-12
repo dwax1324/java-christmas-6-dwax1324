@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class Discount {
 
@@ -27,19 +28,16 @@ public class Discount {
 
     public List<Map.Entry<String, Integer>> calculate(DiscountStrategy... strategies) {
         List<Map.Entry<String, Integer>> discounts = new ArrayList<>();
-        int totalDiscount = 0;
         for (DiscountStrategy strategy : strategies) {
-            int discount = strategy.discount(this);
-            discounts.add(Map.entry(strategy.name(), discount));
-            totalDiscount += discount;
+            discounts.add(Map.entry(strategy.name(), strategy.discount(this)));
         }
-        if (totalDiscount == 0 || menus.totalPrice() < 10000) {
+        if (discounts.stream().mapToInt(Entry::getValue).sum() == 0) { // no discount
             return null;
         }
-        if (!isEventPeriod()) {
+        if (!isEventPeriod()) { // assert event period
             return null;
         }
-        return discounts.stream().filter(r -> r.getValue() > 0).toList();
+        return discounts.stream().filter(discount -> discount.getValue() > 0).toList();
     }
 
     private boolean isEventPeriod() {

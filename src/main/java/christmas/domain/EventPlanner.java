@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import christmas.constants.Policy;
+import christmas.constants.messages.Error;
 import christmas.domain.startegies.DesignatedDayStrategy;
 import christmas.domain.startegies.HolidayStrategy;
 import christmas.domain.startegies.SpecialStrategy;
@@ -9,9 +10,11 @@ import christmas.dto.EventPlannerDto;
 import christmas.dto.MenusDto;
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class EventPlanner {
 
@@ -30,10 +33,12 @@ public class EventPlanner {
     }
 
     private List<Map.Entry<String, Integer>> getDiscount() {
+        if (menus.totalPrice() < 10000) {
+            return null;
+        }
         Discount discount = Discount.of(date, menus);
-        List<Map.Entry<String, Integer>> discounts = discount.calculate(new HolidayStrategy(),
-                new DesignatedDayStrategy(), new SpecialStrategy(), new WeekDayStrategy());
-        return discounts;
+        return discount.calculate(new HolidayStrategy(), new DesignatedDayStrategy(), new SpecialStrategy(),
+                new WeekDayStrategy());
     }
 
     private boolean isGift() {
@@ -54,14 +59,27 @@ public class EventPlanner {
         return "없음";
     }
 
+    private Integer getBeforeDiscount() {
+        return menus.totalPrice();
+    }
+
+
+    private Integer getTotalDiscount(List<Map.Entry<String, Integer>> discount) {
+        if (discount == null) {
+            return 0;
+        }
+        return discount.stream().mapToInt(Entry::getValue).sum();
+    }
+
     public EventPlannerDto toDto() {
-        Integer moneyBeforeDiscount = menus.totalPrice();
-        // getMenusDto / menus.totalPrice() / boolean / DiscountsDto / totalprice-totalDiscount / String Badge
-//        menus / price / boolean / Discounts / priceAfterDiscount / Badge
-        List<Map.Entry<String, Integer>> discount = getDiscount();
-        int discounted = discount.stream().mapToInt(Entry::getValue).sum();
-        System.err.println(discounted);
-        return new EventPlannerDto(menus.toDto(), menus.totalPrice(), isGift(), getDiscount(),
+        int discounted = getTotalDiscount(getDiscount());
+        // 총혜택 금액 = 할인 금액의 합계 + 증정 메뉴의 가격
+        int totalBenefit = 0;
+        if (isGift()) {
+            totalBenefit += 25000;
+        }
+        totalBenefit += discounted;
+        return new EventPlannerDto(date, menus.toDto(), menus.totalPrice(), isGift(), getDiscount(), totalBenefit,
                 menus.totalPrice() - discounted, getBadge());
     }
 
@@ -69,8 +87,12 @@ public class EventPlanner {
         try {
             LocalDate.of(Policy.YEAR.getValue(), Policy.MONTH.getValue(), date);
         } catch (DateTimeException e) {
-            throw new IllegalArgumentException("[ERROR]: 유효한 날짜를 입력해주세요");
+            throw new IllegalArgumentException(Error.DATE.getMessage());
         }
+    }
+
+    public static void validateBeverage(Menus menus) {
+        Set<String> categories = new HashSet<>();
     }
 
     public static EventPlanner of(Integer date, Menus menus) {
