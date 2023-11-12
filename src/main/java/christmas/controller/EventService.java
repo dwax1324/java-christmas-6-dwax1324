@@ -21,14 +21,16 @@ public class EventService {
         Integer date = getDateUntilNoException();
         outputView.askMenu();
         Menus menus = getMenusUntilNoException();
-
-
+        EventPlanner eventPlanner = EventPlanner.of(date, menus);
+        outputView.printResult(eventPlanner.toDto());
     }
 
     private Menus getMenusUntilNoException() {
         while (true) {
             try {
-                return Menus.from(inputView.getMenu());
+                Menus menus = Menus.from(inputView.getMenu());
+                menus.totalPriceLessThan(10000);
+                return menus;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

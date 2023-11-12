@@ -32,6 +32,11 @@ public class Menus {
         }
     }
 
+    public void totalPriceLessThan(Integer limit) {
+        if (totalPrice() < limit) {
+            throw new IllegalArgumentException(Error.MENU.getMessage());
+        }
+    }
 
     public static Menus from(String menus) {
         return new Menus(menus);
