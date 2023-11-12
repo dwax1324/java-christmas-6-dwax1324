@@ -13,16 +13,16 @@ class WeekDayStrategyTest {
     @DisplayName("평일 할인이 적용이  안되는 날짜에 대한 예외 처리")
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 8, 9, 15, 16, 22, 23, 29, 30})
-    void checkHolidayDiscount(int input) {
-        Menus menus = Menus.from("티본스테이크-2");
+    void checkWeekdayDiscount(int input) {
+        Menus menus = Menus.from("초코케이크-2");
         assertThat(new WeekDayStrategy().discount(Discount.of(input, menus))).isEqualTo(0);
     }
 
     @DisplayName("평일 할인이 적용 되는 날짜에 대한 테스트")
     @ParameterizedTest
     @ValueSource(ints = {3, 4, 5, 6, 10, 11, 12})
-    void notHolidayDiscount(int input) {
-        Menus menus = Menus.from("티본스테이크-2");
+    void notWeekdayDiscount(int input) {
+        Menus menus = Menus.from("초코케이크-2");
         assertThat(new WeekDayStrategy().discount(Discount.of(input, menus))).isEqualTo(2023 * 2);
     }
 
