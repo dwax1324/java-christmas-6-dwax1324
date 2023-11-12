@@ -1,11 +1,12 @@
 package christmas.domain;
 
 import christmas.constants.MenuGroup;
+import christmas.constants.messages.Error;
 
 public class Menu {
-    private String name;
-    private String category;
-    private Integer price;
+    private final String name;
+    private final String category;
+    private final Integer price;
 
     Menu(String name) {
         validate(name);
@@ -16,12 +17,16 @@ public class Menu {
 
     private void validate(String name) {
         if (!MenuGroup.isNameExist(name)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(Error.MENU.getMessage());
         }
     }
 
     public Integer getPrice() {
         return this.price;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public boolean isCategoryByCategoryName(String categoryName) {
