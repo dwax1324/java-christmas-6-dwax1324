@@ -4,4 +4,7 @@ import christmas.domain.Discount;
 
 public interface DiscountStrategy {
     Integer discount(Discount discount);
+
+    String name();
+
 }
