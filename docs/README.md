@@ -49,7 +49,7 @@ InputView.getDate() -> InputView.getMenus()
 
 - [x] 안내 메시지 출력 기능
 - [x] 이벤트 계산 결과 출력 기능
-- [] 에러 메시지 출력 기능
+- [x] 에러 메시지 출력 기능
 
 ---
 
@@ -57,7 +57,8 @@ InputView.getDate() -> InputView.getMenus()
 
 ### EventService
 
-- [] 각 객체들을 순서에 맞게 요청하는 기능
+- [x] 각 객체들을 순서에 맞게 요청하는 기능
+- [x] 예외가 없을때까지 입력을 요청하는 기능
 
 ---
 

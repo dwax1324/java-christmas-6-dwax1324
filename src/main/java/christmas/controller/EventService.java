@@ -28,11 +28,9 @@ public class EventService {
     private Menus getMenusUntilNoException() {
         while (true) {
             try {
-                Menus menus = Menus.from(inputView.getMenu());
-                menus.totalPriceLessThan(10000);
-                return menus;
+                return Menus.from(inputView.getMenu());
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                outputView.printError(e.getMessage());
             }
         }
     }
@@ -44,7 +42,7 @@ public class EventService {
                 EventPlanner.validateDate(date);
                 return date;
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                outputView.printError(e.getMessage());
             }
         }
     }
