@@ -27,13 +27,24 @@ public class Discount {
 
     public List<Map.Entry<String, Integer>> calculate(DiscountStrategy... strategies) {
         List<Map.Entry<String, Integer>> discounts = new ArrayList<>();
+        int totalDiscount = 0;
         for (DiscountStrategy strategy : strategies) {
-            discounts.add(Map.entry(strategy.name(), strategy.discount(this)));
+            int discount = strategy.discount(this);
+            discounts.add(Map.entry(strategy.name(), discount));
+            totalDiscount += discount;
         }
-        if (menus.totalPrice() < 10000 || discounts.stream().allMatch(r -> r.getValue() == 0)) {
+        if (totalDiscount == 0 || menus.totalPrice() < 10000) {
+            return null;
+        }
+        if (!isEventPeriod()) {
             return null;
         }
         return discounts.stream().filter(r -> r.getValue() > 0).toList();
+    }
+
+    private boolean isEventPeriod() {
+        // event period: 2023.12.01 ~2023.12.31
+        return localDate.getYear() == 2023 && localDate.getMonthValue() == 12;
     }
 
     public Integer getDate() {
