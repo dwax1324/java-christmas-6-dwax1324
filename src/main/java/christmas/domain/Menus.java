@@ -1,18 +1,35 @@
 package christmas.domain;
 
-import christmas.Utils.Parser;
+import christmas.constants.MenuGroup;
+import christmas.constants.messages.Error;
 import christmas.dto.MenusDto;
+import christmas.utils.Parser;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Menus {
     private final List<Menu> menus;
 
     private Menus(String menus) {
         List<String> parsed = Parser.parseMenuInput(menus);
-        validateSize(parsed);
+        validate(parsed);
         this.menus = parsed.stream().map(Menu::of).toList();
+    }
+
+    private void validate(List<String> parsed) {
+        validateSize(parsed);
+        validateNotOnlyBeverage(parsed);
+    }
+
+    private void validateNotOnlyBeverage(List<String> parsed) {
+        Set<String> categories = new HashSet<>();
+        parsed.forEach(r -> categories.add(MenuGroup.findCategoryByName(r)));
+        if (categories.size() == 1 && categories.contains(MenuGroup.BEVERAGE.name())) {
+            throw new IllegalArgumentException(Error.MENU.getMessage());
+        }
     }
 
 
@@ -22,7 +39,7 @@ public class Menus {
 
     private void validateSize(List<String> parsed) {
         if (parsed.size() > 20) {
-            throw new IllegalArgumentException("MENU TOO MANY");
+            throw new IllegalArgumentException(Error.MENU.getMessage());
         }
     }
 
