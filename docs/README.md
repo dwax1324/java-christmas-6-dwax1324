@@ -26,7 +26,7 @@ InputView.getDate() -> InputView.getMenus()
 ### OutputView
 
 - [x] 안내 메시지 출력 기능
-- [x] 이벤트 계산 결과 출력 기능`
+- [x] 이벤트 계산 결과 출력 기능
 - [] 에러 메시지 출력 기능
 
 ---
@@ -134,6 +134,14 @@ InputView.getDate() -> InputView.getMenus()
 ### Constants/Policy
 
 - [x] 프로그램 진행에 필요한 상수 저장
+
+### Constants/Notificaiton
+
+- [x] 프로그램 진행에 필요한 안내메시지 저장
+
+### Constants/Error
+
+- [x] 프로그램 진행에 필요한 에러메시지 저장
 
 ### Utils/Parser
 
