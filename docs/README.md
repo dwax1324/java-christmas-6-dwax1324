@@ -176,6 +176,16 @@ InputView.getDate() -> InputView.getMenus()
 - [x] 전략에 맞는 할인을 하는 기능
 - [x] 할인의 이름을 반환하는 기능
 
+### Strategies/DesignatedDayStrategy
+
+-[x] 디데이할인을 계산하는 기능
+-[x] 이름 반환 기능
+
+### Strategies/HolidayStrategy
+
+-[x] 휴일할인을 계산하는 기능
+-[x] 이름 반환 기능
+
 ```
 주의할 점
 가격 표기할 때 콤마

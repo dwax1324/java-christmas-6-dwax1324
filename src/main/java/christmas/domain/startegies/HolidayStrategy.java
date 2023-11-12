@@ -2,6 +2,7 @@ package christmas.domain.startegies;
 
 import christmas.constants.MenuGroup;
 import christmas.constants.Policy;
+import christmas.constants.messages.Notification;
 import christmas.domain.Discount;
 
 public class HolidayStrategy implements DiscountStrategy {
@@ -11,5 +12,10 @@ public class HolidayStrategy implements DiscountStrategy {
             return 0;
         }
         return discount.count(MenuGroup.DESSERT.name()) * Policy.HOLIDAY_DISCOUNT.getValue();
+    }
+
+    @Override
+    public String name() {
+        return Notification.HOLIDAY_DISCOUNT.getMessage();
     }
 }
