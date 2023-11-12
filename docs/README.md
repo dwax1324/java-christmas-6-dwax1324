@@ -145,6 +145,10 @@ InputView.getDate() -> InputView.getMenus()
 
 - [x] 프로그램 진행에 필요한 에러메시지 저장
 
+### Constants/Holidays
+
+- [x] 주말에 해당하는 요일을 저장하는 기능
+
 ### Utils/Parser
 
 - [x] 메뉴 입력을 파싱하는 기능
