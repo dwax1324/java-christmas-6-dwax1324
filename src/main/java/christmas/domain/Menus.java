@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import christmas.constants.MenuGroup;
+import christmas.constants.Policy;
 import christmas.constants.messages.Error;
 import christmas.dto.MenusDto;
 import christmas.utils.Parser;
@@ -15,7 +16,7 @@ public class Menus {
 
     private Menus(String menus) {
         List<String> parsed = Parser.parseMenuInput(menus);
-        validateNotOnlyBeverage(parsed);
+        validate(parsed);
         this.menus = parsed.stream().map(Menu::of).toList();
     }
 
@@ -23,10 +24,21 @@ public class Menus {
         return new Menus(menus);
     }
 
+    private void validate(List<String> parsed) {
+        validateSize(parsed);
+        validateNotOnlyBeverage(parsed);
+    }
+
     private void validateNotOnlyBeverage(List<String> parsed) {
         Set<String> categories = new HashSet<>();
         parsed.forEach(r -> categories.add(MenuGroup.findCategoryByName(r)));
         if (categories.size() == 1 && categories.contains(MenuGroup.BEVERAGE.name())) {
+            throw new IllegalArgumentException(Error.MENU.getMessage());
+        }
+    }
+
+    private void validateSize(List<String> parsed) {
+        if (parsed.size() > Policy.MAX_MENU_SIZE.getValue()) {
             throw new IllegalArgumentException(Error.MENU.getMessage());
         }
     }
@@ -42,6 +54,7 @@ public class Menus {
     public Integer countCategoryByCategoryName(String categoryName) {
         return this.menus.stream().filter((menu) -> menu.isCategoryByCategoryName(categoryName)).toList().size();
     }
+
 
     public Integer count(Menu menuToCount) {
         return Math.toIntExact(menus.stream().filter(menu -> menu.equals(menuToCount)).count());
