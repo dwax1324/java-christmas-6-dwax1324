@@ -26,7 +26,6 @@ class ApplicationTest extends NsTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/inputErrors.csv", delimiter = '/')
     void 예상_가능한_잘못된_입력에_대한_예외_처리(String date, String menu, String inputCase) {
-//        System.err.println(date + " " + menu + " " + errorCase);
         assertSimpleTest(() -> {
             runException(date, menu);
             assertThat(output()).contains("[ERROR]");

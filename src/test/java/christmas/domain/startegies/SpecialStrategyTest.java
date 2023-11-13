@@ -21,7 +21,7 @@ class SpecialStrategyTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 30, 6, 13, 26, 4})
     void noDiscount(int input) {
-        Menus menus = Menus.from("제로콜라-1");
+        Menus menus = Menus.from("초코케이크-2");
         assertThat(new SpecialStrategy().discount(Discount.of(input, menus))).isEqualTo(0);
     }
 }

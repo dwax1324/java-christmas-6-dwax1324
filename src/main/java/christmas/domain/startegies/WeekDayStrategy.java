@@ -11,7 +11,7 @@ public class WeekDayStrategy implements DiscountStrategy {
         if (discount.isHoliday()) {
             return 0;
         }
-        return discount.count(MenuGroup.DESSERT.name()) * Policy.WEEKDAY_DISCOUNT.getValue();
+        return discount.countCategory(MenuGroup.DESSERT.name()) * Policy.WEEKDAY_DISCOUNT.getValue();
     }
 
     @Override

@@ -5,19 +5,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import christmas.domain.Discount;
 import christmas.domain.Menus;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class DesignatedDayStrategyTest {
 
     @DisplayName("디데이 할인이 정상적으로 작동하는지 확인")
-    @Test
-    void checkDdayDiscount() {
-        Menus menus = Menus.from("제로콜라-1");
-        assertThat(new DesignatedDayStrategy().discount(Discount.of(1, menus))).isEqualTo(1000);
-        assertThat(new DesignatedDayStrategy().discount(Discount.of(2, menus))).isEqualTo(1100);
-        assertThat(new DesignatedDayStrategy().discount(Discount.of(24, menus))).isEqualTo(3300);
-        assertThat(new DesignatedDayStrategy().discount(Discount.of(25, menus))).isEqualTo(3400);
-
+    @ParameterizedTest
+    @CsvSource(value = {"1 , 1000", "2 , 1100", "24 , 3300", "25, 3400"})
+    void checkDDayDiscount(Integer date, Integer discount) {
+        Menus menus = Menus.from("아이스크림-1");
+        assertThat(new DesignatedDayStrategy().discount(Discount.of(date, menus))).isEqualTo(discount);
     }
 
 }
