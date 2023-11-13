@@ -12,7 +12,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class MenusTest {
-
     @DisplayName("유효한 메뉴 모음 생성 테스트")
     @Test
     void createValidMenuTest() {
@@ -40,7 +39,6 @@ class MenusTest {
         // then
         assertThat(trial).isEqualTo(price);
     }
-
 
     @DisplayName("메뉴 모음에서 같은 카테코리를 수를 잘 반환하는지에 대한 테스트")
     @ParameterizedTest
@@ -87,5 +85,4 @@ class MenusTest {
         // then
         assertThat(menus.toDto()).isInstanceOf(MenusDto.class);
     }
-
 }

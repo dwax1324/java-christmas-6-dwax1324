@@ -9,7 +9,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class MenuGroupTest {
-
     List<String> main = List.of("티본스테이크", "바비큐립", "해산물파스타", "크리스마스파스타");
     List<Integer> mainPrice = List.of(55000, 54000, 35000, 25000);
 
@@ -19,7 +18,6 @@ class MenuGroupTest {
     void isNameExist(String input) {
         assertThat(MenuGroup.isNameExist(input)).isEqualTo(false);
     }
-
 
     @DisplayName("카테고리에 메뉴가 속해있는지 확인")
     @Test
@@ -37,13 +35,11 @@ class MenuGroupTest {
         }
     }
 
-    @DisplayName("저장된 이름이 ")
+    @DisplayName("findPriceByName 메서드 테스트")
     @Test
     void findName() {
         for (int i = 0; i < 4; i++) {
             assertThat(MenuGroup.findPriceByName(main.get(i))).isEqualTo(mainPrice.get(i));
         }
     }
-
-
 }

@@ -6,7 +6,6 @@ import christmas.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
-        EventService eventService = new EventService(new InputView(), new OutputView());
-        eventService.run();
+        EventService.of(new InputView(), new OutputView()).run();
     }
 }

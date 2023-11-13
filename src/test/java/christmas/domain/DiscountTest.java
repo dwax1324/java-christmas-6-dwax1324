@@ -13,8 +13,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class DiscountTest {
-
-
     Menus menus = Menus.from("티본스테이크-1");
 
     @DisplayName("Discount 객체 생성 테스트")

@@ -15,6 +15,10 @@ public class Menu {
         this.price = MenuGroup.findPriceByName(name);
     }
 
+    public static Menu of(String name) {
+        return new Menu(name);
+    }
+
     private void validate(String name) {
         if (!MenuGroup.isNameExist(name)) {
             throw new IllegalArgumentException(Error.MENU.getMessage());
@@ -31,10 +35,6 @@ public class Menu {
 
     public boolean isCategoryByCategoryName(String categoryName) {
         return this.category.equals(categoryName);
-    }
-
-    public static Menu of(String name) {
-        return new Menu(name);
     }
 
     public boolean equals(Menu menu) {

@@ -9,7 +9,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class HolidayStrategyTest {
-
     @DisplayName("주말 할인이 적용 되는 날짜가 잘 적용되는지 확인")
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 8, 9, 15, 16, 22, 23, 29, 30})
@@ -25,5 +24,4 @@ class HolidayStrategyTest {
         Menus menus = Menus.from("티본스테이크-2");
         assertThat(new HolidayStrategy().discount(Discount.of(input, menus))).isEqualTo(0);
     }
-
 }

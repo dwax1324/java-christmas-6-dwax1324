@@ -11,10 +11,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Discount {
-
     private final LocalDate localDate;
     private final Menus menus;
-
 
     private Discount(Integer date, Menus menus) {
         this.localDate = LocalDate.of(Policy.YEAR.getValue(), Policy.MONTH.getValue(), date);
@@ -25,9 +23,8 @@ public class Discount {
         return new Discount(date, menus);
     }
 
-
     public List<Map.Entry<String, Integer>> calculateByStrategies(DiscountStrategy... strategies) {
-        assert (isEventPeriod()); // Christmas event period: 2023.12.01 ~2023.12.31
+        assert (isEventPeriod());
         List<Map.Entry<String, Integer>> discounts = new ArrayList<>();
         for (DiscountStrategy strategy : strategies) {
             discounts.add(Map.entry(strategy.name(), strategy.discount(this)));
@@ -36,6 +33,7 @@ public class Discount {
     }
 
     private boolean isEventPeriod() {
+        // Christmas event period: 2023.12.01 ~2023.12.31
         return localDate.getYear() == 2023 && localDate.getMonthValue() == 12;
     }
 
@@ -43,7 +41,7 @@ public class Discount {
         return localDate.getDayOfMonth();
     }
 
-    public Integer count(String name) {
+    public Integer countCategory(String name) {
         return menus.countCategoryByCategoryName(name);
     }
 

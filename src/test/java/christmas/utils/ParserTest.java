@@ -8,7 +8,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class ParserTest {
-
     @DisplayName("유효하지 않은 형식에 대한 예외 처리")
     @ParameterizedTest
     @ValueSource(strings = {

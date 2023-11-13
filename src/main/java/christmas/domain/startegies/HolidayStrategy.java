@@ -11,7 +11,7 @@ public class HolidayStrategy implements DiscountStrategy {
         if (!discount.isHoliday()) {
             return 0;
         }
-        return discount.count(MenuGroup.MAIN.name()) * Policy.HOLIDAY_DISCOUNT.getValue();
+        return discount.countCategory(MenuGroup.MAIN.name()) * Policy.HOLIDAY_DISCOUNT.getValue();
     }
 
     @Override

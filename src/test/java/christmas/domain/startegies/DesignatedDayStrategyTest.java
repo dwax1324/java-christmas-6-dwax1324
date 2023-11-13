@@ -9,7 +9,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class DesignatedDayStrategyTest {
-
     @DisplayName("디데이 할인이 정상적으로 작동하는지 확인")
     @ParameterizedTest
     @CsvSource(value = {"1 , 1000", "2 , 1100", "24 , 3300", "25, 3400"})
@@ -17,5 +16,4 @@ class DesignatedDayStrategyTest {
         Menus menus = Menus.from("아이스크림-1");
         assertThat(new DesignatedDayStrategy().discount(Discount.of(date, menus))).isEqualTo(discount);
     }
-
 }

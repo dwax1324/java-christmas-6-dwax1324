@@ -5,15 +5,16 @@ import christmas.constants.messages.Notification;
 import christmas.domain.Discount;
 
 public class DesignatedDayStrategy implements DiscountStrategy {
-    
+
     @Override
     public Integer discount(Discount discount) {
-        if (discount.getDate() > 25) {
+        if (discount.getDate() > Policy.CHRISTMAS_DAY.getValue()) {
             return 0;
         }
-        final int designatedDay = discount.getDate() - 1;
+        // 디데이 할인: 1000 + (날짜 - 1) * 100
+        int dDayDiscount = discount.getDate() - 1;
         return Policy.DDAY_INITIAL_DISCOUNT.getValue()
-                + designatedDay * Policy.DDAY_AFTER_DISCOUNT.getValue();
+                + dDayDiscount * Policy.DDAY_AFTER_DISCOUNT.getValue();
     }
 
     @Override

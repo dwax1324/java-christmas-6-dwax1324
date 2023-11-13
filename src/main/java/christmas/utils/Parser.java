@@ -1,5 +1,6 @@
 package christmas.utils;
 
+import christmas.constants.Policy;
 import christmas.constants.messages.Error;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,8 +11,16 @@ import java.util.Set;
 public class Parser {
     public static List<String> parseMenuInput(String input) {
         List<String> parsedInput = Arrays.stream(input.split(",")).toList();
+        if (parsedInput.isEmpty()) {
+            throw new IllegalArgumentException(Error.MENU.getMessage());
+        }
         List<String> result = new ArrayList<>();
         Set<String> names = new HashSet<>();
+        parse(parsedInput, result, names);
+        return result;
+    }
+
+    private static void parse(List<String> parsedInput, List<String> result, Set<String> names) {
         for (String name : parsedInput) {
             List<String> nameAndQuantity = Arrays.stream(name.split("-")).toList();
             nameAndQuantity = nameAndQuantity.stream().map(String::trim).toList();
@@ -21,7 +30,6 @@ public class Parser {
             }
             addNameToResultByQuantity(result, nameAndQuantity);
         }
-        return result;
     }
 
     private static void validate(List<String> nameAndQuantity) {
@@ -44,6 +52,9 @@ public class Parser {
     }
 
     private static void isQuantityParsible(List<String> nameAndQuantity) {
+        if (nameAndQuantity.get(1).charAt(0) == '0') { // quantity can not begin with zero
+            throw new IllegalArgumentException(Error.MENU.getMessage());
+        }
         try {
             Integer.parseInt(nameAndQuantity.get(1));
         } catch (NumberFormatException e) {
@@ -53,10 +64,7 @@ public class Parser {
 
     private static void isQuantityInRange(List<String> nameAndQuantity) {
         int quantity = Integer.parseInt(nameAndQuantity.get(1));
-        if (quantity > 20) {
-            throw new IllegalArgumentException(Error.MENU.getMessage());
-        }
-        if (quantity == 0) {
+        if (quantity > Policy.MAX_MENU_SIZE.getValue()) {
             throw new IllegalArgumentException(Error.MENU.getMessage());
         }
     }

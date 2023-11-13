@@ -6,13 +6,16 @@ import christmas.view.InputView;
 import christmas.view.OutputView;
 
 public class EventService {
-
     private final OutputView outputView;
     private final InputView inputView;
 
-    public EventService(InputView inputView, OutputView outputView) {
+    private EventService(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
+    }
+
+    public static EventService of(InputView inputView, OutputView outputView) {
+        return new EventService(inputView, outputView);
     }
 
     public void run() {
@@ -21,8 +24,7 @@ public class EventService {
         Integer date = getDateUntilNoException();
         outputView.askMenu();
         Menus menus = getMenusUntilNoException();
-        EventPlanner eventPlanner = EventPlanner.of(date, menus);
-        outputView.printResult(eventPlanner.toDto());
+        outputView.printResult(EventPlanner.of(date, menus).toDto());
     }
 
     private Menus getMenusUntilNoException() {

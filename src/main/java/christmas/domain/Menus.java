@@ -15,13 +15,12 @@ public class Menus {
 
     private Menus(String menus) {
         List<String> parsed = Parser.parseMenuInput(menus);
-        validate(parsed);
+        validateNotOnlyBeverage(parsed);
         this.menus = parsed.stream().map(Menu::of).toList();
     }
 
-    private void validate(List<String> parsed) {
-        validateSize(parsed);
-        validateNotOnlyBeverage(parsed);
+    public static Menus from(String menus) {
+        return new Menus(menus);
     }
 
     private void validateNotOnlyBeverage(List<String> parsed) {
@@ -31,17 +30,6 @@ public class Menus {
             throw new IllegalArgumentException(Error.MENU.getMessage());
         }
     }
-
-    public static Menus from(String menus) {
-        return new Menus(menus);
-    }
-
-    private void validateSize(List<String> parsed) {
-        if (parsed.size() > 20) {
-            throw new IllegalArgumentException(Error.MENU.getMessage());
-        }
-    }
-
 
     public Integer totalPrice() {
         int total = 0;
@@ -55,14 +43,13 @@ public class Menus {
         return this.menus.stream().filter((menu) -> menu.isCategoryByCategoryName(categoryName)).toList().size();
     }
 
-
-    public Integer count(Menu menu) {
-        return Math.toIntExact(menus.stream().filter(m -> m.equals(menu)).count());
+    public Integer count(Menu menuToCount) {
+        return Math.toIntExact(menus.stream().filter(menu -> menu.equals(menuToCount)).count());
     }
 
     public MenusDto toDto() {
         Map<String, Integer> entities = new HashMap<>();
-        menus.forEach((r) -> entities.put(r.getName(), this.count(r)));
+        menus.forEach((menu) -> entities.put(menu.getName(), this.count(menu)));
         return new MenusDto(entities.entrySet().stream().toList());
     }
 }

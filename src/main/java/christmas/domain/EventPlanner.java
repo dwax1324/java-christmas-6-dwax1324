@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class EventPlanner {
-
     private final Integer date;
     private final Menus menus;
 
@@ -45,7 +44,7 @@ public class EventPlanner {
     private boolean isGift() {
         return menus.totalPrice() >= Policy.MIN_COST_FOR_GIFT.getValue();
     }
-    
+
     private String getBadge(Integer afterDiscount) {
         if (afterDiscount >= Policy.SANTA.getValue()) {
             return Notification.SANTA.getMessage();

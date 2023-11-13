@@ -43,7 +43,6 @@ public class InputView {
         }
     }
 
-
     private void validateParsible(String input, String errorMessage) {
         try {
             Integer.parseInt(input);
@@ -51,7 +50,6 @@ public class InputView {
             throw new IllegalArgumentException(errorMessage);
         }
     }
-
 
     private void validateNullOrEmpty(String input, String errorMessage) {
         if (input == null || input.isEmpty()) {
