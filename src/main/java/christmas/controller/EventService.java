@@ -1,7 +1,7 @@
 package christmas.controller;
 
 import christmas.domain.EventPlanner;
-import christmas.domain.Menus;
+import christmas.domain.menu.Menus;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 

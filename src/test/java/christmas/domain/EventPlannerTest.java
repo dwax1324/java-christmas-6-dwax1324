@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import christmas.domain.menu.Menus;
 import christmas.dto.EventPlannerDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ class EventPlannerTest {
         assertThatThrownBy(() -> EventPlanner.validateDate(date)).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("이벤트 플래너가 dto로 잘 변환되는지 테스트")
+    @DisplayName("이벤트 플래너가 dto 객체로 잘 변환되는지 테스트")
     @Test
     void toDtoTest() {
         EventPlanner eventPlanner = EventPlanner.of(3, VALID_MENUS);

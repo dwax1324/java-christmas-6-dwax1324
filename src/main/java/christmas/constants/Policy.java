@@ -17,7 +17,8 @@ public enum Policy {
     STAR(5_000),
     TREE(10_000),
     SANTA(20_000),
-    CHAMPAGNE(25_000);
+    CHAMPAGNE(25_000),
+    GIFT_QUANTITY(1);
 
     private final Integer value;
 

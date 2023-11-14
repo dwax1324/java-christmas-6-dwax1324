@@ -11,6 +11,7 @@ public class HolidayStrategy implements DiscountStrategy {
         if (!discount.isHoliday()) {
             return 0;
         }
+        // 주말 할인 : 메인 메뉴의 개수 * 2023 만큼 할인
         return discount.countCategory(MenuGroup.MAIN.name()) * Policy.HOLIDAY_DISCOUNT.getValue();
     }
 

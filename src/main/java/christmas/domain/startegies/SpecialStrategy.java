@@ -10,6 +10,7 @@ public class SpecialStrategy implements DiscountStrategy {
         if (!haveStar(discount)) {
             return 0;
         }
+        // 특별 할인: 별표가 있는 날(모든 일요일과 크리스마스) 1000원 할인
         return Policy.SPECIAL_DISCOUNT.getValue();
     }
 

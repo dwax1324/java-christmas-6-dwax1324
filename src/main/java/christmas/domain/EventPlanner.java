@@ -3,7 +3,9 @@ package christmas.domain;
 import christmas.constants.Policy;
 import christmas.constants.messages.Error;
 import christmas.constants.messages.Notification;
+import christmas.domain.menu.Menus;
 import christmas.domain.startegies.DesignatedDayStrategy;
+import christmas.domain.startegies.GiftStrategy;
 import christmas.domain.startegies.HolidayStrategy;
 import christmas.domain.startegies.SpecialStrategy;
 import christmas.domain.startegies.WeekDayStrategy;
@@ -30,15 +32,11 @@ public class EventPlanner {
 
     private List<Map.Entry<String, Integer>> getDiscount() {
         if (menus.totalPrice() < Policy.MIN_COST_FOR_DISCOUNT.getValue()) {
-            return List.of(); // no discount
+            return List.of(); // 할인 적용 X
         }
         Discount discount = Discount.of(date, menus);
-        List<Entry<String, Integer>> discountResult = discount.calculateByStrategies(new HolidayStrategy(),
-                new DesignatedDayStrategy(), new SpecialStrategy(), new WeekDayStrategy());
-        if (isGift()) {
-            discountResult.add(Map.entry(Notification.GIFT_EVENT.getMessage(), Policy.CHAMPAGNE.getValue()));
-        }
-        return discountResult;
+        return discount.calculateByStrategies(new HolidayStrategy(), new DesignatedDayStrategy(),
+                new SpecialStrategy(), new WeekDayStrategy(), new GiftStrategy());
     }
 
     private boolean isGift() {

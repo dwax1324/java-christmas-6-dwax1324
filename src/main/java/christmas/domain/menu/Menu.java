@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.menu;
 
 import christmas.constants.MenuGroup;
 import christmas.constants.messages.Error;

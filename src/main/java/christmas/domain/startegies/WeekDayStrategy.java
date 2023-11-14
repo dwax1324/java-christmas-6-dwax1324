@@ -11,6 +11,7 @@ public class WeekDayStrategy implements DiscountStrategy {
         if (discount.isHoliday()) {
             return 0;
         }
+        // 평일 할인: 디저트 메뉴 개수 * 2023
         return discount.countCategory(MenuGroup.DESSERT.name()) * Policy.WEEKDAY_DISCOUNT.getValue();
     }
 

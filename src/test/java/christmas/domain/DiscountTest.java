@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
 import christmas.constants.MenuGroup;
+import christmas.domain.menu.Menus;
 import christmas.domain.startegies.DesignatedDayStrategy;
 import christmas.domain.startegies.HolidayStrategy;
 import christmas.domain.startegies.SpecialStrategy;

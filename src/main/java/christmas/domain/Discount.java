@@ -2,6 +2,7 @@ package christmas.domain;
 
 import christmas.constants.Holidays;
 import christmas.constants.Policy;
+import christmas.domain.menu.Menus;
 import christmas.domain.startegies.DiscountStrategy;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,12 +34,16 @@ public class Discount {
     }
 
     private boolean isEventPeriod() {
-        // Christmas event period: 2023.12.01 ~2023.12.31
+        // 크리스마스 프로모션: 2023.12.01 ~ 2023.12.31
         return localDate.getYear() == 2023 && localDate.getMonthValue() == 12;
     }
 
     public Integer getDate() {
         return localDate.getDayOfMonth();
+    }
+
+    public Integer getTotalPrice() {
+        return menus.totalPrice();
     }
 
     public Integer countCategory(String name) {

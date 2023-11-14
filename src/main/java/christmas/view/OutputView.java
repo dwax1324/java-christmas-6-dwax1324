@@ -27,11 +27,11 @@ public class OutputView {
         System.out.printf(Notification.RESULT.getMessage(), Policy.MONTH.getValue(), eventPlannerDto.date());
         System.out.println();
         System.out.println();
-        List<Entry<String, List<String>>> resultOrder = getResultOrder(eventPlannerDto);
-        resultOrder.forEach(result -> print(result.getKey(), result.getValue()));
+        getResultOrder(eventPlannerDto).forEach(result -> print(result.getKey(), result.getValue()));
     }
 
     private List<Entry<String, List<String>>> getResultOrder(EventPlannerDto eventPlannerDto) {
+        // 제목,내용
         return List.of(Map.entry("주문 메뉴", formatMenu(eventPlannerDto.menusDto())),
                 Map.entry("할인 전 총주문 금액", formatBeforeDiscount(eventPlannerDto.beforeDiscount())),
                 Map.entry("증정 메뉴", formatGift(eventPlannerDto.isGift())),
@@ -80,7 +80,8 @@ public class OutputView {
 
     private List<String> formatGift(Boolean gift) {
         if (gift) {
-            return List.of("샴페인 1개");
+            return List.of(String.format(Notification.CHAMPAGNE.getMessage() + " %d개",
+                    Policy.GIFT_QUANTITY.getValue()));
         }
         return List.of(Notification.NONE.getMessage());
     }
